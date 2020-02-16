@@ -1,7 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_video_sharing/video_info.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/services.dart';
+import 'package:transparent_image/transparent_image.dart';
+
+import 'chewie_player.dart';
+import 'apis/firebase_provider.dart';
+import 'apis/publitio_provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,17 +16,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Video Sharing',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Video Sharing'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
+
   final String title;
 
   @override
@@ -27,9 +35,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<String> _videos = <String>[];
-
+  List<VideoInfo> _videos = <VideoInfo>[];
   bool _imagePickerActive = false;
+  bool _uploading = false;
+
+  @override
+  void initState() {
+    PublitioProvider.configurePublitio();
+    FirebaseProvider.listenToVideos((newVideos) {
+      setState(() {
+        _videos = newVideos;
+      });
+    });
+    super.initState();
+  }
 
   void _takeVideo() async {
     if (_imagePickerActive) return;
@@ -42,8 +61,20 @@ class _MyHomePageState extends State<MyHomePage> {
     if (videoFile == null) return;
 
     setState(() {
-      _videos.add(videoFile.path);
+      _uploading = true;
     });
+
+    try {
+      final video = await PublitioProvider.uploadVideo(videoFile);
+      await FirebaseProvider.saveVideo(video);
+    } on PlatformException catch (e) {
+      print('${e.code}: ${e.message}');
+      //result = 'Platform Exception: ${e.code} ${e.details}';
+    } finally {
+      setState(() {
+        _uploading = false;
+      });
+    }
   }
 
   @override
@@ -57,18 +88,57 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(8),
               itemCount: _videos.length,
               itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    child: Center(child: Text(_videos[index])),
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ChewiePlayer(
+                            video: _videos[index],
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: Card(
+                    child: new Container(
+                      padding: new EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Stack(
+                            alignment: Alignment.center,
+                            children: <Widget>[
+                              Center(child: CircularProgressIndicator()),
+                              Center(
+                                child: ClipRRect(
+                                  borderRadius: new BorderRadius.circular(8.0),
+                                  child: FadeInImage.memoryNetwork(
+                                    placeholder: kTransparentImage,
+                                    image: _videos[index].thumbUrl,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(padding: EdgeInsets.only(top: 20.0)),
+                          ListTile(
+                            title: Text(_videos[index].videoUrl),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 );
               })),
       floatingActionButton: FloatingActionButton(
-        onPressed: _takeVideo,
-        tooltip: 'Take Video',
-        child: Icon(Icons.add),
-      ),
+          child: _uploading
+              ? CircularProgressIndicator(
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                )
+              : Icon(Icons.add),
+          onPressed: _takeVideo),
     );
   }
 }
