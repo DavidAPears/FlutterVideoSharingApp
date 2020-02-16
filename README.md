@@ -1,16 +1,26 @@
-# flutter_video_sharing
+flutter_video_sharing
+A test Flutter project. A cross-platform serverless video sharing app with Flutter, Firebase and Publitio
 
-A new Flutter project.
+Getting Started
+* Install Flutter for mac: https://flutter.dev/docs/get-started/install/macos
+* NB: Dflutter_video_sharing
+A test Flutter project. A cross-platform serverless video sharing app with Flutter, Firebase and Publitio
 
-## Getting Started
+Getting Started
+* Install Flutter for mac: https://flutter.dev/docs/get-started/install/macos
+* NB: Don't forget to install Flutter packages for VSCode: https://flutter.dev/docs/development/tools/vs-code
+git clone https://github.com/DavidAPears/VideoSharingApp.git
+cd /flutter_video_sharing
+flutter doctor
+flutter run
+NB: This project is a starting point for a Flutter application (basic resources were provided via https://www.learningsomethingnew.com/how-to-make-a-cross-platform-video-sharing-app-with-flutter-and-firebase):
+* on't forget to install Flutter packages for VSCode: https://flutter.dev/docs/development/tools/vs-code
+* This all came in v.handy: https://stackoverflow.com/questions/56845375/vscode-could-not-find-a-flutter-sdk
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+git clone https://github.com/DavidAPears/VideoSharingApp.git
+cd /flutter_video_sharing
+flutter doctor
+flutter run
+NB: This project is a starting point for a Flutter application (basic resources were provided via https://www.learningsomethingnew.com/how-to-make-a-cross-platform-video-sharing-app-with-flutter-and-firebase):
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
