@@ -1,0 +1,13 @@
+//
+//  Config.xcconfig
+//  Runner
+//
+//  Created by David Pears on 16/02/2020.
+//  Copyright © 2020 The Chromium Authors. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+PUBLITIO_KEY=tudvLqncADnB350nhdHb
+PUBLITIO_SECRET=3D5scN1sSp9R9jqjcnsVrpq5TbXW4M04
