@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "246410175981",
+    "firebase_url": "https://fluttervideoapp-30ba8.firebaseio.com",
+    "project_id": "fluttervideoapp-30ba8",
+    "storage_bucket": "fluttervideoapp-30ba8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246410175981:android:bf9fa1459cdd260af533e4",
+        "android_client_info": {
+          "package_name": "com.learningsomethingnew.fluttervideo.flutter_video_sharing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246410175981-e5jfjk2qovsd279lvncv4u2fthdd9qaq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwidZRIS3OpcEZ5WD4mCyJ5EoDnguaamY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246410175981-e5jfjk2qovsd279lvncv4u2fthdd9qaq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "246410175981-4n6k3a4400ijtegfhmmkvs6aee66knnb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.learningsomethingnew.fluttervideo.flutterVideoSharing"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

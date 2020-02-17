@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
       await FirebaseProvider.saveVideo(video);
     } on PlatformException catch (e) {
       print('${e.code}: ${e.message}');
-      //result = 'Platform Exception: ${e.code} ${e.details}';
+      // result = 'Platform Exception: ${e.code} ${e.details}';
     } finally {
       setState(() {
         _uploading = false;
