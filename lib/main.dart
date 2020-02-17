@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Video Sharing',
+      title: 'Video Sharing. Flutter Test App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
